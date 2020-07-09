@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -17,12 +17,12 @@ const eventSchema = new Schema({
     },
     date: {
         type: Date,
-        requred: true
+        required: true
     },
     creator: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
     }
 });
 
-module.exports = mongoose.model("Event", eventSchema)
+module.exports = mongoose.model('Event', eventSchema);
