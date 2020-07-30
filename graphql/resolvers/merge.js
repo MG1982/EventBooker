@@ -8,9 +8,8 @@ const eventLoader = new DataLoader((eventIds) => {
     return events(eventIds);
 });
 
-const userLoader = new DataLoader((userIds) => {
-    console.log(userIds)
-    return User.find({ _id: { in: userIds } })
+const userLoader = new DataLoader(userIds => {
+    return User.find({ _id: { $in: userIds } });
 });
 
 const events = async eventIds => {
@@ -39,7 +38,7 @@ const user = async userId => {
         return {
             ...user._doc,
             _id: user.id,
-            createdEvents: events.bind(this, user._doc.createdEvents)
+            createdEvents: () => eventLoader.loadMany(user._doc.createdEvents)
         };
     } catch (err) {
         throw err;
